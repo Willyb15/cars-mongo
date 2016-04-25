@@ -1,8 +1,26 @@
+/* line 1, ../../compass/sass/_home.scss */
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: black;
+  text-align: center;
+  color: white;
 }
 
-a {
-  color: #00B7FF;
+/* line 8, ../../compass/sass/_home.scss */
+header {
+  margin-bottom: 50px;
+}
+
+/* line 11, ../../compass/sass/_home.scss */
+#photos-wrapper {
+  margin-top: 50px;
+}
+
+/* line 14, ../../compass/sass/_home.scss */
+#photos-wrapper img {
+  height: 400px;
+}
+
+/* line 17, ../../compass/sass/_home.scss */
+#button-holder {
+  display: inline;
 }

@@ -20,6 +20,17 @@
 // 7. npm install
 // this will install express, all its dependeies, etc. What is inside of package.json
 // 8. Sanity Check run nodemon
+// 9. switch the templating engine (if desired) from Jade.
+// -- in app.js (where its at) go down to the app.set and change it from  .jade file to .ejs file
+// 10. In index.ejs set up our common files and include them
+// -head
+// -header
+// -footer
+// // creates these files on the fly and serves them up
+// 11. Set up a Wrapper div to hold our voting buttons and our image
+// 12. Style the homepage
+// 13. Set up and test Mongo DB
+
 
 
 
@@ -37,7 +48,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
