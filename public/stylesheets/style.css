@@ -24,3 +24,8 @@ header {
 #button-holder {
   display: inline;
 }
+
+/* line 21, ../../compass/sass/_home.scss */
+li {
+  list-style: none;
+}

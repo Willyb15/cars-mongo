@@ -48,6 +48,18 @@ router.get('/', function(req, res, next) {
     // 6B. If, the user has voted on every image in the DB, notify them
 });
 
+
+router.get('/standings', function(req, res, next){
+	// 1. Get all the photos.
+	// 2. Sort them by the highest totals (negatives at the bottom)
+	// res.send('You are on the standing page');
+	db.collection('cars').find().toArray(function(error,result){
+		result.sort(function(a,b){return(b.totalVotes - a.totalVotes);
+		});
+			res.render('standings', {theStandings:result});
+	});
+});
+
 /* Set up the post electric page. */
 router.post('/electric', function(req, res, next) {
     // 1. We know they voted electric, or they wouldn't be here.
@@ -111,7 +123,7 @@ router.post('/poser', function(req, res, next) {
             imageSrc: req.body.photo
         }, {
             $set: {
-                "totalVotes": (total + 1)
+                "totalVotes": (total - 1)
             }
         }, function(error, results) {
             // console.log(results);
