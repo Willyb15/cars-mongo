@@ -6,58 +6,52 @@ var mongoUrl = process.env.MONGOLAB_URI ||
     'mongodb://localhost:27017/test';
 
 var db;
-var allPhotos;
+// var allPhotos;
 
 MongoClient.connect(mongoUrl, function(error, database) {
-    database.collection('cars').find().toArray(function(error, result) {
-        allPhotos = result;
-        db = database;
-    });
+    // database.collection('cars').find().toArray(function(error, result) {
+    // allPhotos = result;
+    db = database;
+    // });
 });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    // 1. Get all pictures from MongoClient
-    // We did this when we connected.
-
-    // 2. Get the current user from mongo
-    var currIP = req.ip;
-    console.log("The current user's IP address is: " + currIP);
-    db.collection('users').find({
-        ip: currIP
-    }).toArray(function(error, userResult) {
-        // IF the user result returns nothing, then the user hasn't voted on anything.
-        if (userResult.length == 0) {
-            // 4. Load all those documents into an array
-            photosToShow = allPhotos;
-        } else {
-            // 4. Only load the photos the user hasn't voted on.
-            // res.send('You voted on something!!!!');
-            photosToShow = allPhotos;
-        }
-        // 5. Pick a random one
-        var randomNum = Math.floor(Math.random() * photosToShow.length);
-        // 6. Send the random one to the view (index.ejs)
-        res.render('index', {
-            carimage: allPhotos[randomNum].imageSrc
-        });
-
-    });
-
-    // 3. Find out which pictures the current user has NOT voted on
-    // 6B. If, the user has voted on every image in the DB, notify them
-});
-
-
-router.get('/standings', function(req, res, next){
-	// 1. Get all the photos.
-	// 2. Sort them by the highest totals (negatives at the bottom)
-	// res.send('You are on the standing page');
-	db.collection('cars').find().toArray(function(error,result){
-		result.sort(function(a,b){return(b.totalVotes - a.totalVotes);
+	//get the users IP
+	var currIP = req.ip;
+	db.collection('users').find({ip:currIP}).toArray(function(error, userResult){
+		var photosVoted = [];
+		console.log(userResult);
+		console.log('=====================');
+		console.log(photosVoted);
+		for(i=0; i<userResult.length; i++){
+			photosVoted.push(userResult[i].image);
+		}
+		db.collection('cars').find({imageSrc: {$nin: photosVoted}}).toArray(function(error, photosToShow){
+				if(photosToShow.length===0){
+					res.redirect('/standings');
+				}else{
+					console.log(photosToShow);
+					var randomNum = Math.floor(Math.random() * photosToShow.length);
+		  			res.render('index', { carimage: photosToShow[randomNum].imageSrc });
+				}
+			});
 		});
-			res.render('standings', {theStandings:result});
 	});
+
+
+router.get('/standings', function(req, res, next) {
+    // 1. Get all the photos.
+    // 2. Sort them by the highest totals (negatives at the bottom)
+    // res.send('You are on the standing page');
+    db.collection('cars').find().toArray(function(error, result) {
+        result.sort(function(a, b) {
+            return (b.totalVotes - a.totalVotes);
+        });
+        res.render('standings', {
+            theStandings: result
+        });
+    });
 });
 
 /* Set up the post electric page. */
@@ -65,14 +59,12 @@ router.post('/electric', function(req, res, next) {
     // 1. We know they voted electric, or they wouldn't be here.
     // 2. We know what they voted on, because we passed it in the req.body var
     // 3. We know who they are, because we know their ip.
-
     // 4. Update the users collection to include: user ip and photo they voted one
     db.collection('users').insertOne({
         ip: req.ip,
         vote: 'electric',
         image: req.body.photo
     });
-
     // 5. Update the images/cars collection "totalVotes" for this particular car, by 1 (because they chose electric)
     db.collection('cars').find({
         imageSrc: req.body.photo
@@ -132,7 +124,7 @@ router.post('/poser', function(req, res, next) {
     });
 
     res.redirect('/');
-   
+
     // res.send("The user chose " + req.body.photo + " as a poser picture.");
     // 1. We know they voted electric, or they wouldn't be here.
     // 2. We know what they voted on, because we passed it in the req.body var
