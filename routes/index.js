@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var mongoUrl = process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
+    // process.env.MONGOHQ_URL ||
     'mongodb://localhost:27017/test';
 
 var db;
@@ -17,27 +17,35 @@ MongoClient.connect(mongoUrl, function(error, database) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	//get the users IP
-	var currIP = req.ip;
-	db.collection('users').find({ip:currIP}).toArray(function(error, userResult){
-		var photosVoted = [];
-		console.log(userResult);
-		console.log('=====================');
-		console.log(photosVoted);
-		for(i=0; i<userResult.length; i++){
-			photosVoted.push(userResult[i].image);
-		}
-		db.collection('cars').find({imageSrc: {$nin: photosVoted}}).toArray(function(error, photosToShow){
-				if(photosToShow.length===0){
-					res.redirect('/standings');
-				}else{
-					console.log(photosToShow);
-					var randomNum = Math.floor(Math.random() * photosToShow.length);
-		  			res.render('index', { carimage: photosToShow[randomNum].imageSrc });
-				}
-			});
-		});
-	});
+    //get the users IP
+    var currIP = req.ip;
+    db.collection('users').find({
+        ip: currIP
+    }).toArray(function(error, userResult) {
+        var photosVoted = [];
+        console.log(userResult);
+        console.log('=====================');
+        console.log(photosVoted);
+        for (i = 0; i < userResult.length; i++) {
+            photosVoted.push(userResult[i].image);
+        }
+        db.collection('cars').find({
+            imageSrc: {
+                $nin: photosVoted
+            }
+        }).toArray(function(error, photosToShow) {
+            if (photosToShow.length === 0) {
+                res.redirect('/standings');
+            } else {
+                console.log(photosToShow);
+                var randomNum = Math.floor(Math.random() * photosToShow.length);
+                res.render('index', {
+                    carimage: photosToShow[randomNum].imageSrc
+                });
+            }
+        });
+    });
+});
 
 
 router.get('/standings', function(req, res, next) {
