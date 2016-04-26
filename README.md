@@ -6,6 +6,7 @@ Steps To Get Express up and Running
 ```
 --This will create an entire folder structure with everything we need to get started making an express web (dub dub dub) application
 ####2. add a .gitignore file that will (at least) ignore everything inside of node_modules
+#Perfect node modules are in this repo! Need to Review this step ;]
 ```
 sudo vi .gitignore
 ```
@@ -15,8 +16,7 @@ unless there if very good reason. Don't want to clog up the repository. This is 
 ####3.Copy the compass boilerplate into the project
 --This will give you access to compass. Need to change the ruby config file to write to the correct spot. 
 This means changing the path of the css write to the directory to ../public/stylesheets
-####4. 
-Init git the repo 
+####4. Initialize git (the repo) or start it up in Github Desktop 
 from the command line
 ```
 --git init
@@ -50,3 +50,8 @@ nodemon
 -head
 -header
 -footer
+//creates these files on the fly and serves them up
+####11. Setup up a Wrapper div to hold our voting buttons and our image
+####12. Style the Homepage (using Compass)
+####13. Set up and test Mongo DB
+####14. If you're this far - go to home page routes/index.js for next Steps..
