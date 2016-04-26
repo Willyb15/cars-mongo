@@ -143,5 +143,30 @@ router.post('/poser', function(req, res, next) {
     // res.send(req.query.submit);
 });
 
+router.get("/reset", function(req, res, next){
+	db.collection("cars").updateMany(
+			{},
+			{
+				$set: { "totalVotes": 0}
+			},
+			{}
+		);
+
+	res.redirect("/");
+});
+
+router.get("/resetUser", function(req, res, next){
+	db.collection("users").find().toArray(function(error, result){
+		for(var i = 0; i < result.length; i++){
+			db.collection("users").deleteOne(
+				{"ip": "::1"},
+				function(err, results) {
+
+	      		}	
+			);
+		}
+	});
+});
+
 
 module.exports = router;
