@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
-var mongoUrl = process.env.MONGOLAB_URI ||
-    // process.env.MONGOHQ_URL ||
+var mongoUrl = process.env.MONGODB_URI ||
+    process.env.MONGOHQ_URL ||
     'mongodb://localhost/test';
 
 var db;
