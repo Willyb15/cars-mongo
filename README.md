@@ -1,4 +1,4 @@
-# Making Express.js App with Mongodb
+# Voting App Created with Express.js and Mongodb
 Steps To Get Express up and Running
 ####1. Initialize with the Express.js generator. Run express command + name you want to name directory (mongo2)
 ```
