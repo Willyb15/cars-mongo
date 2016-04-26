@@ -8,7 +8,7 @@
 // 3.Copy the compass boilerplate into the project
 // --this will give you access to compass. Need to change the ruby config file to write to the correct spot. 
 // This means changing the path of the css write to the directory to ../public/stylesheets
-// 4. Init git the repo 
+// 4. Initialize git (the repo) or start it up in GitHub Desktop 
 // from the command line
 // -- --git init
 // -- --git add * (this will add ALL files in the direcotry to be committed
@@ -30,7 +30,6 @@
 // 11. Set up a Wrapper div to hold our voting buttons and our image
 // 12. Style the homepage
 // 13. Set up and test Mongo DB
-
 
 
 
@@ -59,8 +58,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
-
+// app.use('/users', users);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
