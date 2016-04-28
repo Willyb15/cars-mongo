@@ -4,8 +4,8 @@ Steps To Get Express up and Running
 ```
 --npm init
 --npm install express --save
---express
 --express mongo2
+--npm install
 ```
 --This will create an entire folder structure with everything we need to get started making an express web (dub dub dub) application
 ####2. add a .gitignore file that will (at least) ignore everything inside of node_modules
