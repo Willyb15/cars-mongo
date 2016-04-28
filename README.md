@@ -13,8 +13,12 @@ Steps To Get Express up and Running
 ```
 sudo vi .gitignore
 ```
+This will enter vi text editor and create a .gitignore file to place our ignored files
+```
+node_modles/*
+```
 Shift ZZ will escape the vi editor with saving
---Reason for this? If someone wants to run your app, they can do an npm install themselves. These modules should not be committed to the repisotry
+--Reason to ignore this? If someone wants to run your app, they can do an npm install themselves. These modules should not be committed to the repisotry
 unless there if very good reason. Don't want to clog up the repository. This is "best practice"
 ####3.Copy the compass boilerplate into the project
 --This will give you access to compass. Need to change the ruby config file to write to the correct spot. 
