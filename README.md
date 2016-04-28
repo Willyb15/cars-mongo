@@ -2,6 +2,9 @@
 Steps To Get Express up and Running
 ####1. Initialize with the Express.js generator. Run express command + name you want to name directory (mongo2)
 ```
+--npm init
+--npm install express --save
+--express
 --express mongo2
 ```
 --This will create an entire folder structure with everything we need to get started making an express web (dub dub dub) application
