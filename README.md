@@ -1,5 +1,5 @@
 # Voting App Created with Express.js and Mongodb
-![alt text](public/images.png "Description goes here")
+![alt text](public/images/ss.png "Description goes here")
 Steps To Get Express up and Running
 ####1. Initialize with the Express.js generator. Run express command + name you want to name directory (mongo2)
 ```
