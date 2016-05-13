@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
-var mongoUrl = process.env.MONGODB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/test';
+// var mongoUrl = process.env.MONGODB_URI ||
+//     process.env.MONGOHQ_URL ||
+//     'mongodb://localhost/test';
+var mongoUrl = "mongodb://localhost:27017/cars";
 
 var db;
 // var allPhotos;
